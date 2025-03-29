@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Book } from "./types/Book"; // Adjust path if necessary
+import { Book } from "../types/Book"; // Adjust path if necessary
+import { useNavigate } from "react-router-dom";
 
-const BookList = () => {
+const BookList = ({ selectedCategories }: { selectedCategories: string[] }) => {
     const [books, setBooks] = useState<Book[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [pageSize, setPageSize] = useState<number>(10);
@@ -9,9 +10,16 @@ const BookList = () => {
     const [totalItems, setTotalItems] = useState<number>(0);
     const [totalPages, setTotalPages] = useState<number>(0);
     const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+    const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://localhost:5019/api/Book?pageHowMany=${pageSize}&pageNum=${pageNum}&sortBy=title&sortOrder=${sortOrder}`)
+        const categoryParams = selectedCategories.map((cat) => `category=${encodeURIComponent(cat)}`).join('&');
+
+        fetch(
+            `http://localhost:5019/api/Book?pageHowMany=${pageSize}&pageNum=${pageNum}&sortBy=title&sortOrder=${sortOrder}${
+                selectedCategories.length ? `&${categoryParams}` : ''
+            }`
+        )
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("Failed to fetch book data");
@@ -28,7 +36,7 @@ const BookList = () => {
                 console.error("Error fetching books:", error);
                 setLoading(false);
             });
-    }, [pageSize, pageNum, totalItems, sortOrder]);
+    }, [pageSize, pageNum, totalItems, sortOrder, selectedCategories]);
 
     if (loading) {
         return <p className="text-center fs-5">Loading books...</p>;
@@ -38,14 +46,26 @@ const BookList = () => {
         <div id="bookCard" className="container mt-4">
             <h2 className="text-center mb-4">Book List</h2>
 
-            {/* Sorting Button */}
-            <button 
-                className="btn btn-primary mb-3"
-                onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
-            >
-                Sort by Title ({sortOrder === "asc" ? "Ascending" : "Descending"})
-            </button>
+            {/* Button container with sorting and add new book button */}
+            <div className="d-flex justify-content-between align-items-center mb-3">
+                {/* Sorting Button */}
+                <button 
+                    className="btn btn-primary"
+                    onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
+                >
+                    Sort by Title ({sortOrder === "asc" ? "Ascending" : "Descending"})
+                </button>
 
+                {/* Add New Book Button */}
+                <button 
+                    className="btn btn-success btn-lg rounded-circle shadow"
+                    style={{ width: "60px", height: "60px" }}
+                >
+                    +
+                </button>
+            </div>
+
+            {/* Table */}
             <div className="table-responsive">
                 <table className="table table-striped table-bordered shadow">
                     <thead className="table-primary">
@@ -58,6 +78,7 @@ const BookList = () => {
                             <th>Category</th>
                             <th>Page Count</th>
                             <th>Price</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,6 +92,11 @@ const BookList = () => {
                                 <td>{book.category}</td>
                                 <td>{book.pageCount}</td>
                                 <td>${book.price.toFixed(2)}</td>
+                                <td>
+                                    <button className="btn btn-primary" onClick={() => navigate(`/addBook/${book.title}/${book.bookID}/${book.price}`)}>
+                                        Add
+                                    </button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
@@ -101,10 +127,14 @@ const BookList = () => {
             {/* Page Size Selector */}
             <div className="mt-3 text-center">
                 <label className="me-2">Results per page:</label>
-                <select className="form-select d-inline-block w-auto" value={pageSize} onChange={(p) => {
-                    setPageSize(Number(p.target.value));
-                    setPageNum(1);
-                }}>
+                <select 
+                    className="form-select d-inline-block w-auto" 
+                    value={pageSize} 
+                    onChange={(p) => {
+                        setPageSize(Number(p.target.value));
+                        setPageNum(1);
+                    }}
+                >
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="15">15</option>
@@ -115,6 +145,8 @@ const BookList = () => {
 };
 
 export default BookList;
+
+
 
 
 

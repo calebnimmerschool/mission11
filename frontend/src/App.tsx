@@ -1,14 +1,27 @@
 import React from "react";
-import BookList from "./BookList";
+import BooksPage from "./pages/BooksPage";
+import AddBook from "./pages/AddBook";
+import CartPage from "./pages/CartPage";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { CartProvider } from "./context/CartContext";
+
 
 const App: React.FC = () => {
+
+   
+
     return (
-        <div>
-            <h1 style={{ textAlign: "center", marginBottom: "20px", fontSize: "30px", color: "#333" }}>
-                Welcome to the Bookstore
-            </h1>
-            <BookList />
-        </div>
+    <>
+        <CartProvider>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<BooksPage />} />
+                    <Route path="/addBook/:title/:bookID/:price" element={<AddBook />} />
+                    <Route path="/CartPage" element={<CartPage />} />
+                </Routes>
+            </Router>
+        </CartProvider>
+    </>
     );
 };
 
