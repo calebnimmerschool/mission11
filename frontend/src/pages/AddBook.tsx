@@ -23,7 +23,7 @@ function AddBook() {
     };
 
     return (
-        <div className="container d-flex justify-content-center align-items-center vh-100">
+        <div id="bookCard" className="container mt-4">
             <div className="card shadow-lg p-4" style={{ maxWidth: "500px" }}>
                 <div className="card-body text-center">
                     <h2 className="card-title mb-4">Add Book to Cart</h2>
@@ -44,6 +44,7 @@ function AddBook() {
 }
 
 export default AddBook;
+
 
 
 

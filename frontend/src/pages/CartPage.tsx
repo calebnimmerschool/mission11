@@ -14,7 +14,7 @@ const CartPage: React.FC = () => {
     );
 
     return (
-        <div className="container mt-5">
+        <div id="bookCard" className="container mt-4">
             <h2 className="text-center mb-4">Your Cart</h2>
 
             {cart.length === 0 ? (
@@ -38,17 +38,18 @@ const CartPage: React.FC = () => {
                         <tbody>
                             {Object.keys(cartSummary).map((title) => {
                                 const summary = cartSummary[title];
-                                const book = cart.find((item) => item.title === title);
-
                                 return (
-                                    <tr key={book?.bookID}>
+                                    <tr key={title}>
                                         <td>{title}</td>
                                         <td>{summary.count}</td>
-                                        <td>${(summary.price * summary.count).toFixed(2)}</td>
+                                        <td>${summary.price.toFixed(2)}</td>
                                         <td>
                                             <button
                                                 className="btn btn-danger btn-sm"
-                                                onClick={() => removeFromCart(book?.bookID || 0)}
+                                                onClick={() => {
+                                                    const book = cart.find((item) => item.title === title);
+                                                    removeFromCart(book?.bookID || 0);
+                                                }}
                                             >
                                                 Remove
                                             </button>
@@ -82,5 +83,3 @@ const CartPage: React.FC = () => {
 };
 
 export default CartPage;
-
-

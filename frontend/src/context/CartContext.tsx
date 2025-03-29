@@ -1,5 +1,5 @@
-import { CartItem } from "../types/CartItem"
-import { createContext, useContext, ReactNode, useState } from "react"
+import { CartItem } from "../types/CartItem";
+import { createContext, useContext, ReactNode, useState } from "react";
 
 interface CartContextType {
     cart: CartItem[];
@@ -16,12 +16,8 @@ export const CartProvider = ({children}: {children: ReactNode}) => {
 
     const addToCart = (item: CartItem) => {
         setCart((prevCart) => {
-            const existingItem = prevCart.find((c) => c.bookID === item.bookID);
-            const updatedCart = prevCart.map((c) =>
-                c.bookID === item.bookID ? {...c, cartPrice: c.price + item.price} : c
-            );
-
-            return existingItem ? updatedCart : [...prevCart, item];
+            // Add the item to the cart without modifying CartItem directly
+            return [...prevCart, item];
         });
     };
 
@@ -33,32 +29,37 @@ export const CartProvider = ({children}: {children: ReactNode}) => {
         setCart(() => []);
     };
 
+    // Dynamically calculate count and price for each book title
     const getCartSummary = () => {
         const summary: Record<string, { count: number; price: number }> = {};
+
         cart.forEach((item) => {
-          if (summary[item.title]) {
-            summary[item.title].count += 1;
-          } else {
-            summary[item.title] = {
-              count: 1,
-              price: item.price, // assuming each book has the same price
-            };
-          }
+            // Check if the title already exists in the summary
+            if (summary[item.title]) {
+                summary[item.title].count += 1;
+                summary[item.title].price += item.price;
+            } else {
+                summary[item.title] = {
+                    count: 1,
+                    price: item.price,
+                };
+            }
         });
+
         return summary;
-      };
+    };
 
     return (
         <cartContext.Provider value={{cart, addToCart, removeFromCart, clearCart, getCartSummary}}>
             {children}
         </cartContext.Provider>
     );
-}
+};
 
 export const useCart = () => {
     const context = useContext(cartContext);
     if (!context) {
-        throw new Error('blah');
+        throw new Error('CartContext is not available');
     }
     return context;
 };

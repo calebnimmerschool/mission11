@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Book } from "../types/Book"; // Adjust path if necessary
 import { useNavigate } from "react-router-dom";
+import confetti from "canvas-confetti";  // Import confetti library
 
 const BookList = ({ selectedCategories }: { selectedCategories: string[] }) => {
     const [books, setBooks] = useState<Book[]>([]);
@@ -38,6 +39,15 @@ const BookList = ({ selectedCategories }: { selectedCategories: string[] }) => {
             });
     }, [pageSize, pageNum, totalItems, sortOrder, selectedCategories]);
 
+    // Trigger confetti animation
+    const triggerConfetti = () => {
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { x: 0.5, y: 0.5 },
+        });
+    };
+
     if (loading) {
         return <p className="text-center fs-5">Loading books...</p>;
     }
@@ -49,12 +59,19 @@ const BookList = ({ selectedCategories }: { selectedCategories: string[] }) => {
             {/* Button container with sorting and add new book button */}
             <div className="d-flex justify-content-between align-items-center mb-3">
                 {/* Sorting Button */}
-                <button 
+                <button
                     className="btn btn-primary"
-                    onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
-                >
+                    style={{ transition: "background-color 0.3s ease" }}
+                    onClick={() => {
+                        setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+                        triggerConfetti();  // Trigger confetti on click
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#ff5733'} // Hover effect
+                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = ''} // Reset on hover out
+                    >
                     Sort by Title ({sortOrder === "asc" ? "Ascending" : "Descending"})
                 </button>
+
 
                 {/* Add New Book Button */}
                 <button 
@@ -145,6 +162,7 @@ const BookList = ({ selectedCategories }: { selectedCategories: string[] }) => {
 };
 
 export default BookList;
+
 
 
 
