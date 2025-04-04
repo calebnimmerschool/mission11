@@ -7,7 +7,7 @@ function CategoryFilter ({selectedCategories, setSelectedCategories}: {selectedC
 
     useEffect (() => {
         const fetchCategories = async () => {
-            const response = await fetch('https://bookproject3-nimmer-backend-e6dreybneefkeeck.eastus2-01.azurewebsites.net/api');
+            const response = await fetch('https://bookproject3-nimmer-backend-e6dreybneefkeeck.eastus2-01.azurewebsites.net/api/GetBookTypes');
             const data = await response.json();
 
             setCategories(data);
