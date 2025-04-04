@@ -11,8 +11,8 @@ builder.Services.AddOpenApi();
 // Enable CORS for React frontend
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowReactApp",
-        policy => policy.WithOrigins("http://localhost:5173") // Allow frontend access
+    options.AddPolicy("AllowAnyOrigin",
+        policy => policy.AllowAnyOrigin() // Allow frontend access
                         .AllowAnyHeader()
                         .AllowAnyMethod());
 });
@@ -24,7 +24,7 @@ builder.Services.AddDbContext<BookContext>(options =>
 var app = builder.Build();
 
 // Enable CORS
-app.UseCors("AllowReactApp");
+app.UseCors("AllowAnyOrigin");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
