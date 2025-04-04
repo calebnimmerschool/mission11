@@ -1,0 +1,10 @@
+﻿bin/
+obj/
+logs/
+wwwroot/
+
+
+.vs/
+*.suo
+*.user
+*.sln.docstates

@@ -11,6 +11,14 @@
       "RelativeMoniker": "D:0:0:{ED065E1C-695E-49CC-B447-26CD8CA9C074}|mission11.API.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{ED065E1C-695E-49CC-B447-26CD8CA9C074}|mission11.API.csproj|c:\\users\\caleb\\documents\\asp.net\\mission11\\backend\\mission11.api\\.watchignore||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{ED065E1C-695E-49CC-B447-26CD8CA9C074}|mission11.API.csproj|solutionrelative:.watchignore||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED065E1C-695E-49CC-B447-26CD8CA9C074}|mission11.API.csproj|c:\\users\\caleb\\documents\\asp.net\\mission11\\backend\\mission11.api\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{ED065E1C-695E-49CC-B447-26CD8CA9C074}|mission11.API.csproj|solutionrelative:.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{ED065E1C-695E-49CC-B447-26CD8CA9C074}|mission11.API.csproj|c:\\users\\caleb\\documents\\asp.net\\mission11\\backend\\mission11.api\\data\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{ED065E1C-695E-49CC-B447-26CD8CA9C074}|mission11.API.csproj|solutionrelative:data\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -30,8 +38,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": ".watchignore",
+              "DocumentMoniker": "C:\\Users\\caleb\\Documents\\ASP.Net\\mission11\\backend\\mission11.API\\.watchignore",
+              "RelativeDocumentMoniker": ".watchignore",
+              "ToolTip": "C:\\Users\\caleb\\Documents\\ASP.Net\\mission11\\backend\\mission11.API\\.watchignore",
+              "RelativeToolTip": ".watchignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-02T01:54:48.082Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\caleb\\Documents\\ASP.Net\\mission11\\backend\\mission11.API\\.gitignore",
+              "RelativeDocumentMoniker": ".gitignore",
+              "ToolTip": "C:\\Users\\caleb\\Documents\\ASP.Net\\mission11\\backend\\mission11.API\\.gitignore",
+              "RelativeToolTip": ".gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-02T01:53:08.602Z"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -40,7 +72,7 @@
               "RelativeDocumentMoniker": "Controllers\\BookController.cs",
               "ToolTip": "C:\\Users\\caleb\\Documents\\ASP.Net\\mission11\\backend\\mission11.API\\Controllers\\BookController.cs",
               "RelativeToolTip": "Controllers\\BookController.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAYwCkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAAYwBQAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-20T20:36:13.87Z",
               "EditorCaption": ""
@@ -53,14 +85,14 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\caleb\\Documents\\ASP.Net\\mission11\\backend\\mission11.API\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-20T01:28:19.759Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Book.cs",
               "DocumentMoniker": "C:\\Users\\caleb\\Documents\\ASP.Net\\mission11\\backend\\mission11.API\\Data\\Book.cs",
               "RelativeDocumentMoniker": "Data\\Book.cs",
@@ -68,12 +100,11 @@
               "RelativeToolTip": "Data\\Book.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-20T01:26:05.317Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-20T01:26:05.317Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\caleb\\Documents\\ASP.Net\\mission11\\backend\\mission11.API\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -85,7 +116,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "BookContext.cs",
               "DocumentMoniker": "C:\\Users\\caleb\\Documents\\ASP.Net\\mission11\\backend\\mission11.API\\Data\\BookContext.cs",
               "RelativeDocumentMoniker": "Data\\BookContext.cs",
