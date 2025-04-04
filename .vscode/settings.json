@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/153d32e0-9881-4483-87dc-1266c8f8a272/resourceGroups/appsvc_windows_eastus/providers/Microsoft.Web/sites/BookProject-Nimmer-Backend",
+    "appService.deploySubpath": "backend\\mission11.API\\publish"
+}
