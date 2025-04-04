@@ -3,7 +3,7 @@
     "ContainingType": "mission11.API.Controllers.BookController",
     "Method": "GetBooks",
     "RelativePath": "api/Book",
-    "HttpMethod": "",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -16,6 +16,84 @@
         "Name": "pageNum",
         "Type": "System.Int32",
         "IsRequired": false
+      },
+      {
+        "Name": "sortBy",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "sortOrder",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "projectTypes",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "mission11.API.Controllers.BookController",
+    "Method": "AddBook",
+    "RelativePath": "api/Book/AddBook",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newBook",
+        "Type": "mission11.API.Data.Book",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "mission11.API.Controllers.BookController",
+    "Method": "deleteBook",
+    "RelativePath": "api/Book/DeleteBook/{bookId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bookId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "mission11.API.Controllers.BookController",
+    "Method": "GetBookTypes",
+    "RelativePath": "api/Book/GetBookTypes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "mission11.API.Controllers.BookController",
+    "Method": "updateBook",
+    "RelativePath": "api/Book/UpdateBook/{bookId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bookId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedBook",
+        "Type": "mission11.API.Data.Book",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

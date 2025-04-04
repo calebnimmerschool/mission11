@@ -12,9 +12,10 @@ builder.Services.AddOpenApi();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp",
-        policy => policy.WithOrigins("http://localhost:3000") // Allow frontend access
+        policy => policy.WithOrigins("http://localhost:5173") // Allow frontend access
                         .AllowAnyHeader()
-                        .AllowAnyMethod());
+                        .AllowAnyMethod()
+                        .AllowCredentials());
 });
 
 // Configure SQLite database using the connection string from appsettings.json
@@ -24,7 +25,7 @@ builder.Services.AddDbContext<BookContext>(options =>
 var app = builder.Build();
 
 // Enable CORS
-app.UseCors(x => x.WithOrigins("http://localhost:5173"));
+app.UseCors("AllowReactApp");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

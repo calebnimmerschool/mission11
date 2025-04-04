@@ -1,5 +1,8 @@
 ﻿bin/
 obj/
+logs/
+wwwroot/
+
 
 .vs/
 *.suo

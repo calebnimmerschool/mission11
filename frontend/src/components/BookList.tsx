@@ -2,42 +2,36 @@ import { useEffect, useState } from "react";
 import { Book } from "../types/Book"; // Adjust path if necessary
 import { useNavigate } from "react-router-dom";
 import confetti from "canvas-confetti";  // Import confetti library
+import { fetchProjects } from "../api/ProjectsAPI";
+import Pagination from "./Pagination";
 
-const BookList = ({ selectedCategories }: { selectedCategories: string[] }) => {
+
+function BookList({ selectedCategories }: { selectedCategories: string[] }) {
     const [books, setBooks] = useState<Book[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [pageSize, setPageSize] = useState<number>(10);
     const [pageNum, setPageNum] = useState<number>(1);
-    const [totalItems, setTotalItems] = useState<number>(0);
-    const [totalPages, setTotalPages] = useState<number>(0);
+    const [totalPages, setTotalPages] = useState<number>(1); // Ensure totalPages is at least 1 by default
     const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
     const navigate = useNavigate();
 
     useEffect(() => {
-        const categoryParams = selectedCategories.map((cat) => `category=${encodeURIComponent(cat)}`).join('&');
-
-        fetch(
-            `http://localhost:5019/api/Book?pageHowMany=${pageSize}&pageNum=${pageNum}&sortBy=title&sortOrder=${sortOrder}${
-                selectedCategories.length ? `&${categoryParams}` : ''
-            }`
-        )
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Failed to fetch book data");
-                }
-                return response.json();
-            })
-            .then((data) => {
+        const fetchBooks = async () => {
+            try {
+                setLoading(true);
+                const data = await fetchProjects(pageSize, pageNum, selectedCategories, sortOrder);
+                
                 setBooks(data.books);
-                setTotalItems(data.totalNumBooks);
-                setTotalPages(Math.ceil(data.totalNumBooks / pageSize));
-                setLoading(false);
-            })
-            .catch((error) => {
+                setTotalPages(Math.max(1, Math.ceil(data.totalNumBooks / pageSize))); // Ensure totalPages is at least 1
+            } catch (error) {
                 console.error("Error fetching books:", error);
+            } finally {
                 setLoading(false);
-            });
-    }, [pageSize, pageNum, totalItems, sortOrder, selectedCategories]);
+            }
+        };
+
+        fetchBooks();
+    }, [pageSize, pageNum, selectedCategories, sortOrder]);
 
     // Trigger confetti animation
     const triggerConfetti = () => {
@@ -68,10 +62,9 @@ const BookList = ({ selectedCategories }: { selectedCategories: string[] }) => {
                     }}
                     onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#ff5733'} // Hover effect
                     onMouseLeave={(e) => e.currentTarget.style.backgroundColor = ''} // Reset on hover out
-                    >
+                >
                     Sort by Title ({sortOrder === "asc" ? "Ascending" : "Descending"})
                 </button>
-
 
                 {/* Add New Book Button */}
                 <button 
@@ -119,54 +112,19 @@ const BookList = ({ selectedCategories }: { selectedCategories: string[] }) => {
                     </tbody>
                 </table>
             </div>
-
-            {/* Pagination Buttons */}
-            <div className="d-flex justify-content-center mt-3">
-                <button className="btn btn-secondary me-2" disabled={pageNum === 1} onClick={() => setPageNum(pageNum - 1)}>
-                    Previous
-                </button>
-
-                {[...Array(totalPages)].map((_, index) => (
-                    <button 
-                        key={index + 1} 
-                        className={`btn ${pageNum === index + 1 ? "btn-primary" : "btn-outline-primary"} mx-1`}
-                        onClick={() => setPageNum(index + 1)}
-                    >
-                        {index + 1}
-                    </button>
-                ))}
-
-                <button className="btn btn-secondary ms-2" disabled={pageNum === totalPages} onClick={() => setPageNum(pageNum + 1)}>
-                    Next
-                </button>
-            </div>
-
-            {/* Page Size Selector */}
-            <div className="mt-3 text-center">
-                <label className="me-2">Results per page:</label>
-                <select 
-                    className="form-select d-inline-block w-auto" 
-                    value={pageSize} 
-                    onChange={(p) => {
-                        setPageSize(Number(p.target.value));
-                        setPageNum(1);
-                    }}
-                >
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                </select>
-            </div>
-        </div>
+             <Pagination 
+                currentPage={pageNum}
+                totalPages={totalPages}
+                pageSize={pageSize}
+                onPageChange={setPageNum}
+                onPageSizeChange={(newSize: number) => {
+                    setPageSize(newSize);
+                    setPageNum(1);
+                }}
+            />
+        </div> 
+        
     );
 };
 
 export default BookList;
-
-
-
-
-
-
-
-

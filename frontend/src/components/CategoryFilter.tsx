@@ -18,7 +18,7 @@ function CategoryFilter ({selectedCategories, setSelectedCategories}: {selectedC
     }, []);
 
     function handleCheckboxChange ({target} : {target: HTMLInputElement}) {
-        const updatedCategories = selectedCategories.includes(target.value) ? selectedCategories.filter(x => x !== target.value) :[...selectedCategories, target.value];
+        const updatedCategories = selectedCategories.includes(target.value) ? selectedCategories.filter((x) => x !== target.value) :[...selectedCategories, target.value];
 
         setSelectedCategories(updatedCategories);
     }

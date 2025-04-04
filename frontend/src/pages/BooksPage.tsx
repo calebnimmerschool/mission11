@@ -4,6 +4,7 @@ import Welcome from "../components/Welcome";
 import CartSummary from "../components/CartSummary"
 import { useState } from "react";
 
+
 function ProjectsPage () {
 
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
